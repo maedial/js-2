@@ -84,7 +84,7 @@ select.addEventListener('input', (e) => {
     language = e.target.value;
 })
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault();     //!!!!!!!!!! empêche le formulaire de recharger la page
     
     if(cgv.checked){
         document.querySelector('form > div').innerHTML = `
@@ -115,3 +115,27 @@ boxes.forEach(box => {
         e.target.style.transform = 'scale(0.7)';
     })
 });
+//------------------------------------------------------------------
+//Bubbling -> de base eventlistener est en bubbling = A LA FIN
+document.body.addEventListener('click', ()=>{
+    console.log('click #1 !');
+})
+//Usecapture -> AU DEBUT, il faut passer le 3ieme argument à true (false par defaut)
+document.body.addEventListener('click', ()=>{
+    console.log('click #2 !');
+}, true)
+
+//------------------------------------------------------------------
+//stop propagation
+questionContainer.addEventListener('click',(e)=>{
+    alert('test');
+    e.stopPropagation();    //empêche que d'autre clicks puissent être pris en compte, n'empêche cependant pas l'evènement qui avait le Usecapture puisqu'il passe avant cet evènement là
+})
+//------------------------------------------------------------------
+//methode removeEventListener pour retirer un eventListener
+
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// BOM : Brother Object Model
+
