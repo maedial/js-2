@@ -139,3 +139,70 @@ questionContainer.addEventListener('click',(e)=>{
 //------------------------------------------------------------------
 // BOM : Brother Object Model
 
+//Evénements addossés à l'objet window
+//alert
+//alert('hello');
+
+//confirm
+/* btn2.addEventListener('click', ()=>{
+    confirm('voulez vous vraiment vous tromper ?');
+}) */
+
+//prompt
+/* btn1.addEventListener('click', ()=>{
+    let answer = prompt('entrez votre nom');
+
+    questionContainer.innerHTML += "<h3>Bravo " + answer + "</h3>";
+}) */
+
+//Timer, compte à rebours
+//temps en milisecondes avant de déclancher la logique ou la fonction (en premier paramètre)
+setTimeout(()=>{
+questionContainer.style.borderRadius = "300px";
+},2000)
+
+//Execute un bout de code toutes les x milisecondes
+//dans cet example ce sont les guillemets de la touche 7 qui permettent d'indenter le 'innerHtml
+/* let interval = setInterval(()=>{
+        document.body.innerHTML +=`
+        <div class='box'>
+            <h2>Nouvelle boite !</h2>
+        </div>`;
+    },1000);
+
+document.body.addEventListener('click', (e)=>{
+    //e.target.remove();      //permet de supprimer un elément du DOM (balise, bouton, body... TOUT)
+    clearInterval(interval);
+}) */
+
+//------------------------------------------------------------------
+//Location
+/* console.log(window.location.href);
+console.log(window.location.host);
+console.log(window.location.hostname);
+console.log(window.location.protocol);
+console.log(window.location.port);
+console.log(window.location.ancestorOrigins);
+console.log(window.location.pathname); */
+
+//location.replace('http://lemonde.fr')
+/* window.onload=()=>{
+    location.href = "http://lequipe.fr";
+}; */
+
+//------------------------------------------------------------------
+//Navigator
+//console.log(navigator.userAgent);
+
+//------------------------------------------------------------------
+//history
+//console.log(history);
+//window.history.back();
+//history.go(-2); //revient 2 pages en arrière
+
+//------------------------------------------------------------------
+//Set property
+window.addEventListener('mousemove',(e)=>{
+    nav.style.setProperty('--x', e.layerX + "px");
+    nav.style.setProperty('--y', e.layerY + "px");
+})
