@@ -90,8 +90,28 @@ form.addEventListener('submit', (e) => {
         document.querySelector('form > div').innerHTML = `
         <h3>Pseudo : ${pseudo}</h3>
         <h4>language préféré : ${language}</h4>
-        `;   //pas aussi classe que de passer par une varialbe mais fonctionne, permet d'injecter du HTML... balise etc...
+        `;   //pas aussi classe que de passer par une varialbe mais fonctionne, permet d'injecter du HTML... balise etc... par contre si au lieu de innerHTML on utilise textContent, les balise n'auraient pas été interprétées et auraient été affichées tels quel.
     }else{
         alert('Veuillez accepter les CGV');
     }
 })
+//------------------------------------------------------------------
+// load event //se dévlenche quand la page a finit de chargée
+
+window.addEventListener('load', ()=>{
+    console.log("c'est bon c'est chargé !!");
+})
+
+//------------------------------------------------------------------
+//ForEach
+
+//sélectionner plusieurs objets qui partagent la même classe
+//const boxes = document.getElementsByClassName('box'); //ATTENTION ne fonctionne QUE si plusieurs objets avec la même classe !! il y a un s à Element(s) !!
+const boxes = document.querySelectorAll('.box');    //autre et meilleur technique pour selectionner les objets de la classe box
+console.log(boxes);
+
+boxes.forEach(box => {
+    box.addEventListener('click', (e) => {
+        e.target.style.transform = 'scale(0.7)';
+    })
+});
