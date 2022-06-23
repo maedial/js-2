@@ -210,7 +210,7 @@ let arrayNumber = [4,74,28,12,1];
 //------------------------
 //  IMPORTANT OBJETS//
 //------------------------
-document.body.innerHTML = data
+/* document.body.innerHTML = data
     .filter((user) => user.admin === false)
     //.filter((user) => user.age > 30)
     .filter((user) => user.pseudo.includes('i'))
@@ -223,4 +223,91 @@ document.body.innerHTML = data
             <p>${user.admin ? 'Modérateur':'Membre'}</p>
         </div>
     `)
-    .join("")
+    .join("") */
+
+//------------------------------------------------------------------------
+//              LES DATES           //
+//------------------------------------------------------------------------
+
+//Dates classiques
+let date = new Date();
+
+//Timestamp -> tps écoulé entre 01/01/1970 et aujourd'hui en s
+let timestamp = Date.parse(date);
+//console.log(timestamp);
+
+//IsoString
+let iso = date.toISOString();
+
+function dateParser (chaine)  {
+    let newDate = new Date(chaine).toLocaleDateString("fr-FR",{
+        year: "numeric",
+        month: "long",
+        day:"numeric",
+        weekday: "long"
+    });
+    return newDate;
+};
+
+/* console.log(dateParser(date));
+console.log(dateParser(timestamp));
+console.log(dateParser(iso)); */
+
+//------------------------------------------------------------------------
+//              LE DESTRUCTURING           //
+//------------------------------------------------------------------------
+//case 1
+    let moreData = {
+        destVar : ['Element 1', 'Element 2']
+    }
+
+    const {destVar} = moreData;     //se lit const destVar = moreData.destVar;
+
+    //console.log(moreData.destVar);
+    //console.log(destVar);
+
+//case 2
+    let array5 = [70,80,90];
+    let [x, y, z] = array5;
+    //console.log(x);
+    //console.log(y);
+    //console.log(z);
+
+//case 3
+//console.log(iso);
+const dateDestructuring = (chaine) =>{
+    let newDate = chaine.split('T')[0];
+    let [y, m, d] = newDate.split('-');
+    return [d, m , y].join('/');
+}
+//console.log(dateDestructuring(iso));
+
+
+//------------------------------------------------------------------------
+//     Les Datasets -> données que l'on peut mettre dans les balises
+//------------------------------------------------------------------------
+//Cela permet d'accéder à des élements sans passer par les ID ou les classes, cf cours FromScratch #3 à 3h12.
+
+
+//------------------------------------------------------------------------
+//     Regex        
+//------------------------------------------------------------------------
+//search -> is trouve retourne 0 sinon -1
+let mail = 'from_sratch33@gmail.com';
+//console.log(mail.search(/from/));   //retourne 0
+
+//replace -> cherche et remplace
+//console.log(mail.replace(/from/,'de'));
+
+//match -> renvoi null si ne match pas  -> i pour case non sensitive
+    //console.log(mail.match(/scratCH/i));
+    //console.log(mail.match(/[zug]/i));  //test si au moins l'un des caractères entre crochets se trouve dans la chaine à tester
+
+    //console.log(mail.match(/\d/));  //test si il y a un chiffre
+    //console.log(mail.match(/[a-z]/));  //test si il y a une lettre
+
+    //console.log(mail.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i));
+
+//séparateur de milliers en regex
+    let separator = 2265659859;
+    //console.log(separator.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
