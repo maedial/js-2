@@ -1,0 +1,18 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    background-color: aqua;
+    border-radius: 20px;
+    padding: 25px;
+    width: 400px;
+}
+.todo{
+    color: rgb(71, 67, 67);
+    display: block;
+}
+.todo:hover{
+    cursor: pointer;
+}
