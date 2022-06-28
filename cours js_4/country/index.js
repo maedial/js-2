@@ -1,24 +1,37 @@
 const countriesContainer = document.getElementById('countriesContainer');
 const inputRange = document.getElementById('inputRange');
 const rangeValue = document.getElementById('rangeValue');
-
+const  minToMax = document.getElementById('minToMax');
+const  maxToMin = document.getElementById('maxToMin');
+const  alpha = document.getElementById('alpha');
+let sortMinToMax = false;
+let sortMaxToMin = false;
+let sortAlpha = true;
 let countries = [];
 
+//fetch de la data
 async function fetchCountries (){
     await fetch('https://restcountries.com/v3.1/all')
     .then((res) => res.json()
     .then((data) => countries = data));
 
-    //console.log(countries);
     displayCountry();
 }
 
-fetchCountries();
-
+//Affichage
 function displayCountry(){
-    console.log(rangeValue.textContent);
     countriesContainer.innerHTML = countries
+        .filter((country) => country.name.official.toLowerCase().includes(inputSearch.value.toLowerCase()))
         .slice(0,inputRange.value)
+        .sort((a,b)=>{
+            if(sortMinToMax){
+                return a.population - b.population;
+            }else if(sortMaxToMin){
+                return b.population - a.population;
+            }else{
+                return a.name.official - b.name.official;
+            }
+        })
         .map((country) => `
             <div class="card">
                 <img src="${country.flags.png}" alt="${country.name.official}">
@@ -30,32 +43,25 @@ function displayCountry(){
         .join('');
 }
 
+//gestion du statut du tri
+function sortCountries (sortType){
+    sortMinToMax = sortType === 'minToMax'?true:false;
+    sortMaxToMin = sortType === 'maxToMin'?true:false;
+    sortAlpha = sortType === 'alpha'?true:false;
+    
+    fetchCountries();
+}
+
+
+//Listeners
+fetchCountries();
+inputSearch.addEventListener('input', ()=> fetchCountries());
+
 inputRange.addEventListener('change', (e) => {
-    rangeValue.textContent = e.target.value
+    rangeValue.textContent = e.target.value;
     fetchCountries();
 });
 
-// 5 - Récupérer ce qui est tapé dans l'input et filtrer (avant le map) les données
-//coutry.name.includes(inputSearch.value);
-
-// 6 - Avec la méthode Slice gérer le nombre de pays affichés (inputRange.value)
-
-// 7 - Gérer les 3 boutons pour trier (méthode sort()) les pays
-
-
-//architecture de la fonction d'affichage
-/* countriesContainer.innerHTML =  monTableau
-    .filter((country) => country.nomdupays.includes(inputSearch))
-    .sort((a,b) => {
-        if(...){
-            return...
-        }else if(...){
-            return ...
-        }
-    })
-    .slice(0,inputValue)
-    .map((country) => `
-        <div class= "card>
-
-        </div>
-    `) */
+minToMax.addEventListener('click', ()=> sortCountries('minToMax'));
+maxToMin.addEventListener('click', ()=> sortCountries('maxToMin'));
+alpha.addEventListener('click', ()=> sortCountries('alpha'));
