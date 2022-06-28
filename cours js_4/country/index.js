@@ -1,4 +1,7 @@
 const countriesContainer = document.getElementById('countriesContainer');
+const inputRange = document.getElementById('inputRange');
+const rangeValue = document.getElementById('rangeValue');
+
 let countries = [];
 
 async function fetchCountries (){
@@ -13,18 +16,24 @@ async function fetchCountries (){
 fetchCountries();
 
 function displayCountry(){
+    console.log(rangeValue.textContent);
     countriesContainer.innerHTML = countries
+        .slice(0,inputRange.value)
         .map((country) => `
             <div class="card">
                 <img src="${country.flags.png}" alt="${country.name.official}">
                 <h2>${country.name.official}</h2>
                 <h3>${country.capital}</h3>
-                <p>${country.population}</p>
+                <p>Population ${country.population}</p>
             </div>
         `)
         .join('');
 }
 
+inputRange.addEventListener('change', (e) => {
+    rangeValue.textContent = e.target.value
+    fetchCountries();
+});
 
 // 5 - Récupérer ce qui est tapé dans l'input et filtrer (avant le map) les données
 //coutry.name.includes(inputSearch.value);
