@@ -1,0 +1,20 @@
+{
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "vscode-icons",
+    "explorer.confirmDragAndDrop": false,
+    "bracketPairColorizer.depreciation-notice": false,
+    "explorer.confirmDelete": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "extensions.autoUpdate": "onlyEnabledExtensions",
+    "emmet.preferences": {
+        "emmet.includeLanguages": { "javascript":"javascriptreact" }
+    },
+    "emmet.excludeLanguages": [],
+    "emmet.triggerExpansionOnTab": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "editor.wordWrap": "on",
+    "workbench.colorTheme": "One Dark Pro Darker"
+}
