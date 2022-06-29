@@ -1,12 +1,9 @@
 const countriesContainer = document.getElementById('countriesContainer');
 const inputRange = document.getElementById('inputRange');
 const rangeValue = document.getElementById('rangeValue');
-const  minToMax = document.getElementById('minToMax');
-const  maxToMin = document.getElementById('maxToMin');
-const  alpha = document.getElementById('alpha');
-let sortMinToMax = false;
-let sortMaxToMin = false;
-let sortAlpha = true;
+const btnSort = document.querySelectorAll('.btnSort');
+
+let sortType = 'minToMax';
 let countries = [];
 
 //fetch de la data
@@ -24,37 +21,28 @@ function displayCountry(){
         .filter((country) => country.name.official.toLowerCase().includes(inputSearch.value.toLowerCase()))
         .slice(0,inputRange.value)
         .sort((a,b)=>{
-            if(sortMinToMax){
+            if(sortType === 'minToMax'){
                 return a.population - b.population;
-            }else if(sortMaxToMin){
+            }else if(sortType === 'maxToMin'){
                 return b.population - a.population;
-            }else{
+            }else if(sortType === 'alpha'){
                 return a.name.official.toLowerCase().localeCompare(b.name.official.toLowerCase());
             }
         })
         .map((country) => `
             <div class="card">
-                <img src="${country.flags.png}" alt="${country.name.official}">
+                <img src="${country.flags.png}" alt="drapeau ${country.name.official}">
                 <h2>${country.name.official}</h2>
                 <h3>${country.capital}</h3>
-                <p>Population ${country.population}</p>
+                <p>Population ${country.population.toLocaleString()}</p>
             </div>
         `)
         .join('');
 }
 
-//gestion du statut du tri
-function sortCountries (sortType){
-    sortMinToMax = sortType === 'minToMax'?true:false;
-    sortMaxToMin = sortType === 'maxToMin'?true:false;
-    sortAlpha = sortType === 'alpha'?true:false;
-    
-    fetchCountries();
-}
-
-
 //Listeners
-fetchCountries();
+window.addEventListener('load', fetchCountries());
+
 inputSearch.addEventListener('input', ()=> fetchCountries());
 
 inputRange.addEventListener('change', (e) => {
@@ -62,6 +50,9 @@ inputRange.addEventListener('change', (e) => {
     fetchCountries();
 });
 
-minToMax.addEventListener('click', ()=> sortCountries('minToMax'));
-maxToMin.addEventListener('click', ()=> sortCountries('maxToMin'));
-alpha.addEventListener('click', ()=> sortCountries('alpha'));
+btnSort.forEach((btn) => {
+    btn.addEventListener("click", (e)=>{
+        sortType = e.target.id;
+        fetchCountries();
+    })
+});

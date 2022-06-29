@@ -52,12 +52,17 @@ input[type="range"] {
   background: #292828;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   box-shadow: 0 1px 6px rgba(51, 51, 51, 0.192);
+  color: white;
 <<<<<<< HEAD
   
-  min-height: 260px;
 =======
   position: relative;
 >>>>>>> b639ea1 (modification du tri alphabétique, tout fonctionne sauf la mise en page css qui est pas top...)
   display: grid;
   overflow: hidden;
+}
+img{
+  height: 100px;
+  width: 160px;
+  object-fit: cover;
 }
