@@ -29,7 +29,7 @@ function displayCountry(){
             }else if(sortMaxToMin){
                 return b.population - a.population;
             }else{
-                return a.name.official - b.name.official;
+                return a.name.official.toLowerCase().localeCompare(b.name.official.toLowerCase());
             }
         })
         .map((country) => `
