@@ -64,6 +64,15 @@ const display = {
   },
   choices: function(){
     let choices = quizz.getCurrentQuestion().choices;
+
+    guesshandler = (id, guess) =>{
+      document.getElementById(id).onclick = function(){
+        quizz.guess(guess);
+        quizzApp();
+      }
+    }
+
+    //
   }
 }
 
