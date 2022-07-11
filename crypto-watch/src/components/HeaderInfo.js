@@ -34,7 +34,7 @@ const HeaderInfo = () => {
             percent={headerData.market_cap_change_percentage_24h_usd}
           />
         </li>
-        {/*         <li>
+        {/* <li>
           BTC dominance :{" "}
           {headerData.market_cap_percentage.btc &&
             headerData.market_cap_percentage.btc.toFixed(1) + "%"}
@@ -43,7 +43,7 @@ const HeaderInfo = () => {
           ETH dominance :{" "}
           {headerData.market_cap_percentage.eth &&
             headerData.market_cap_percentage.eth.toFixed(1) + "%"}
-        </li> */}
+        </li>{" "} */}
       </ul>
       <TableFilters />
     </div>

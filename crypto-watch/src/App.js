@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import GlobalChart from "./components/GlobalChart";
 import HeaderInfo from "./components/HeaderInfo";
 import axios from "axios";
+import Table from "./components/Table";
+import ToTop from "./components/ToTop";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
@@ -18,6 +20,8 @@ const App = () => {
         <HeaderInfo />
         <GlobalChart coinsData={coinsData} />
       </header>
+      <Table coinsData={coinsData} />
+      <ToTop />
     </div>
   );
 };
