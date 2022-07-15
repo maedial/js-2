@@ -12,7 +12,7 @@ const User = () => {
         <img src="https://thispersondoesnotexist.com/image" alt="" />
         <p>Age : 35 ans</p>
         <p>
-          Like{!isEmpty(user[0]) && user[0].likes > 1 ? "s" : null}:{" "}
+          Like{!isEmpty(user[0]) && user[0].likes > 1 ? "s" : null} :{" "}
           {!isEmpty(user[0]) && user[0].likes}
         </p>
       </div>

@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-import Like from "./Like";
 import { useDispatch, useSelector } from "react-redux";
-import { isEmpty } from "../components/Utils";
-import { editPosts, deletePosts } from "../actions/post.actions";
+import { deletePost, editPost } from "../actions/post.action";
+import Like from "./Like";
+import { isEmpty } from "./Utils";
 
 const Post = ({ post }) => {
-  const user = useSelector((state) => state.userReducer);
   const [editToggle, setEditToggle] = useState(false);
   const [editContent, setEditContent] = useState(post.content);
+  const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const handleEdit = (e) => {
     e.preventDefault();
 
     const postData = {
-      // normalement en MongoDB, on ne modifie que la donnée qui a changée, avec json server il faut repasser tous les champs
       title: post.title,
-      content: editContent,
       author: user[0].pseudo,
+      content: editContent,
       likes: post.likes,
       id: post.id,
     };
-    dispatch(editPosts(postData));
+    dispatch(editPost(postData));
     setEditToggle(false);
   };
 
@@ -35,9 +34,9 @@ const Post = ({ post }) => {
             alt="edit"
           />
           <img
+            onClick={() => dispatch(deletePost(post.id))}
             src="./icons/delete.svg"
             alt="delete"
-            onClick={() => dispatch(deletePosts(post.id))}
           />
         </div>
       )}
@@ -47,18 +46,19 @@ const Post = ({ post }) => {
         className="post-img"
         alt="img-post"
       />
+
       {editToggle ? (
         <form onSubmit={(e) => handleEdit(e)}>
           <textarea
+            type="text"
             defaultValue={post.content}
             onChange={(e) => setEditContent(e.target.value)}
-          ></textarea>
-          <input type="submit" value="Valider modifications" />
+          />
+          <input type="submit" value="Valider modification" />
         </form>
       ) : (
         <p>{post.content}</p>
       )}
-
       <div className="author">
         <h5>{post.author}</h5>
         <Like post={post} />

@@ -1,12 +1,13 @@
 import React from "react";
-import PostForm from "./components/PostForm";
 import { useSelector } from "react-redux";
-import User from "./components/User";
 import Post from "./components/Post";
+import PostForm from "./components/PostForm";
+import User from "./components/User";
 import { isEmpty } from "./components/Utils";
 
 const App = () => {
   const posts = useSelector((state) => state.postReducer);
+
   return (
     <div>
       <h1>Extreme</h1>
